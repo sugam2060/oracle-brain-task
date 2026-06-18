@@ -2,6 +2,11 @@
 
 A robust, production-ready Lead Management RESTful API built with **Node.js, Express, TypeScript, and Prisma (PostgreSQL)**. 
 
+🚀 **Live API Base URL**: [https://oracle.sugampudasain.xyz](https://oracle.sugampudasain.xyz)  
+💻 **Local Development URL**: `http://localhost:3000`  
+🧪 **Testing**: You can easily test all endpoints using [Postman](https://www.postman.com/) or any similar API client.
+ 
+
 ## 🏗 Architecture Overview
 
 The application follows a modular, object-oriented, three-tier architecture:
@@ -16,6 +21,13 @@ The application follows a modular, object-oriented, three-tier architecture:
 - **Validation**: Strict runtime payload validation using `Zod`.
 - **Rate Limiting**: Sliding-window rate limiter utilizing a local memory map to prevent abuse (e.g., max 100 requests per 15 minutes per IP/User).
 - **CSV Exporting**: Bypasses pagination to export all leads natively as a streaming CSV file.
+
+### Why PostgreSQL over MongoDB?
+While MongoDB is excellent for unstructured data, **PostgreSQL** was chosen for this Lead Management system for several critical reasons:
+1. **Relational Data Integrity**: Lead management inherently involves highly structured, relational data (e.g., Users `1:N` Leads). PostgreSQL enforces strict foreign key constraints, preventing orphaned records if a user is deleted.
+2. **ACID Compliance**: Ensuring that operations (like assigning a lead to a sales rep while updating its status) are fully transactional and atomic.
+3. **Advanced Querying & Indexing**: Searching through thousands of leads based on complex criteria (status, text search on names/companies) is highly optimized in PostgreSQL using B-Tree and text-search indices.
+4. **Predictable Schema**: Using Prisma with PostgreSQL provides a strongly-typed schema that guarantees data consistency, whereas MongoDB's schema-less nature can lead to fragmented data structures as the application evolves.
 
 ## 📂 Folder Structure
 
