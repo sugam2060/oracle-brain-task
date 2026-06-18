@@ -1,0 +1,12 @@
+version: '3.8'
+
+services:
+  api:
+    image: sugam2060/oracle-brain-task:latest
+    container_name: oracle-brain-api
+    ports:
+      - "3000:3000"
+    # This automatically mounts your local .env file into the container
+    env_file:
+      - .env
+    restart: unless-stopped
